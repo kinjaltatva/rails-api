@@ -13,12 +13,12 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    question.update(question_params)
+    @question.update(question_params)
     render json: question.to_json, status: 200
   end
 
   def destroy
-    question.destroy
+    @question.destroy
     render json: {message: 'Question is destroy successfully'}, status: 200
   end
 
@@ -36,10 +36,10 @@ class QuestionsController < ApplicationController
   private
 
   def get_question
-    question = Question.find_by(id: params[:id])
+    @question = Question.find_by(id: params[:id])
   end
 
   def question_params
-    params.require(:question).permit(:role_id, :mapping_id, :question_type, :is_required, :team_stage, :appear, :conditions, :frequency)
+    params.require(:question).permit(:role_id, :mapping_id, :question_type, :is_required, :team_stage, :appear, :conditions, :frequency, :question)
   end
 end
