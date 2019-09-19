@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
 
   def create
     question = Question.create(question_params)
-    render json: question.to_json(:include => {:mapping => {:only => [:mapping_name]}, :roles => {:only => [:name]} }), status: 200
+    render json: question.to_json(:include => {:mapping => {:only => [:mapping_name]}, :role => {:only => [:name]} }), status: 200
   end
 
   def update
