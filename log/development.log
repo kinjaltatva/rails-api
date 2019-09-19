@@ -1,0 +1,809 @@
+  [1m[35m (1703.7ms)[0m  [1m[35mCREATE DATABASE "test_api_development" ENCODING = 'unicode'[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (167.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (107.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7318714466777309085)[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateMappings (20190919090853)
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (83.3ms)[0m  [1m[35mCREATE TABLE "mappings" ("id" bigserial primary key, "mapping_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190919090853_create_mappings.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190919090853"]]
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (19.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateRoles (20190919091003)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (75.3ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190919091003_create_roles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190919091003"]]
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (12.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+Migrating to CreateQuestions (20190919091139)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (124.6ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "question" text, "team_stage" character varying, "appear" integer, "frequency" integer, "question_type" character varying, "role_id" bigint, "is_required" boolean, "conditions" character varying, "mapping_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_9d4d6c6fc2"
+FOREIGN KEY ("role_id")
+  REFERENCES "roles" ("id")
+, CONSTRAINT "fk_rails_897334f7f0"
+FOREIGN KEY ("mapping_id")
+  REFERENCES "mappings" ("id")
+)[0m
+  ↳ db/migrate/20190919091139_create_questions.rb:3
+  [1m[35m (39.7ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_role_id" ON "questions"  ("role_id")[0m
+  ↳ db/migrate/20190919091139_create_questions.rb:3
+  [1m[35m (29.7ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_mapping_id" ON "questions"  ("mapping_id")[0m
+  ↳ db/migrate/20190919091139_create_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190919091139"]]
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (13.2ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mActiveRecord::InternalMetadata Create (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-09-19 12:28:28.359022"], ["updated_at", "2019-09-19 12:28:28.359022"]]
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (20.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(7318714466777309085)[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/bin/rake:23
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (1.2ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Admin"], ["created_at", "2019-09-19 12:30:33.024130"], ["updated_at", "2019-09-19 12:30:33.024130"]]
+  [1m[36mMapping Create (0.6ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Collaboration"], ["created_at", "2019-09-19 12:30:33.026507"], ["updated_at", "2019-09-19 12:30:33.026507"]]
+  [1m[36mQuestion Create (1.3ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the team's collaboration?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 1], ["created_at", "2019-09-19 12:30:33.028260"], ["updated_at", "2019-09-19 12:30:33.028260"]]
+  [1m[35m (32.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.3ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Engagement"], ["created_at", "2019-09-19 12:30:33.069767"], ["updated_at", "2019-09-19 12:30:33.069767"]]
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the team's engagement?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 2], ["created_at", "2019-09-19 12:30:33.070842"], ["updated_at", "2019-09-19 12:30:33.070842"]]
+  [1m[35m (19.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.7ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Communication"], ["created_at", "2019-09-19 12:30:33.097583"], ["updated_at", "2019-09-19 12:30:33.097583"]]
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the team's communications?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 3], ["created_at", "2019-09-19 12:30:33.099955"], ["updated_at", "2019-09-19 12:30:33.099955"]]
+  [1m[35m (15.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your own communications?"], ["team_stage", "All"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 3], ["created_at", "2019-09-19 12:30:33.125304"], ["updated_at", "2019-09-19 12:30:33.125304"]]
+  [1m[35m (19.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.6ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Trust"], ["created_at", "2019-09-19 12:30:33.153818"], ["updated_at", "2019-09-19 12:30:33.153818"]]
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your relationships with other team members?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.155712"], ["updated_at", "2019-09-19 12:30:33.155712"]]
+  [1m[35m (17.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the relationships between the team members?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.182419"], ["updated_at", "2019-09-19 12:30:33.182419"]]
+  [1m[35m (18.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your own level of collaboration with other team members?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 1], ["created_at", "2019-09-19 12:30:33.209620"], ["updated_at", "2019-09-19 12:30:33.209620"]]
+  [1m[35m (18.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your own level of engagement?"], ["team_stage", "All"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 2], ["created_at", "2019-09-19 12:30:33.243772"], ["updated_at", "2019-09-19 12:30:33.243772"]]
+  [1m[35m (12.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Resources"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.7ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Resources"], ["created_at", "2019-09-19 12:30:33.264553"], ["updated_at", "2019-09-19 12:30:33.264553"]]
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team has sufficient resources?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 5], ["created_at", "2019-09-19 12:30:33.266584"], ["updated_at", "2019-09-19 12:30:33.266584"]]
+  [1m[35m (18.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.6ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Clarity"], ["created_at", "2019-09-19 12:30:33.293884"], ["updated_at", "2019-09-19 12:30:33.293884"]]
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team's goals and roles are clear?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 6], ["created_at", "2019-09-19 12:30:33.295866"], ["updated_at", "2019-09-19 12:30:33.295866"]]
+  [1m[35m (17.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (0.8ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "User"], ["created_at", "2019-09-19 12:30:33.323232"], ["updated_at", "2019-09-19 12:30:33.323232"]]
+  [1m[36mQuestion Create (1.3ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel there is a good trust environment for your team?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Always"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.327080"], ["updated_at", "2019-09-19 12:30:33.327080"]]
+  [1m[35m (11.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Management"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.8ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Management"], ["created_at", "2019-09-19 12:30:33.350477"], ["updated_at", "2019-09-19 12:30:33.350477"]]
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel the team has good management?"], ["team_stage", "All"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Always"], ["mapping_id", 7], ["created_at", "2019-09-19 12:30:33.353054"], ["updated_at", "2019-09-19 12:30:33.353054"]]
+  [1m[35m (14.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel this is a good project for your organization?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 1], ["created_at", "2019-09-19 12:30:33.377984"], ["updated_at", "2019-09-19 12:30:33.377984"]]
+  [1m[35m (18.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.5ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team is currently productive?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 2], ["created_at", "2019-09-19 12:30:33.407666"], ["updated_at", "2019-09-19 12:30:33.407666"]]
+  [1m[35m (15.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are currently productive?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 3], ["created_at", "2019-09-19 12:30:33.434143"], ["updated_at", "2019-09-19 12:30:33.434143"]]
+  [1m[35m (17.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you think the project will get done on time and on budget?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 3], ["created_at", "2019-09-19 12:30:33.461279"], ["updated_at", "2019-09-19 12:30:33.461279"]]
+  [1m[35m (18.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you find your work interesting and rewarding?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.490440"], ["updated_at", "2019-09-19 12:30:33.490440"]]
+  [1m[35m (17.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team has good morale?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.519163"], ["updated_at", "2019-09-19 12:30:33.519163"]]
+  [1m[35m (15.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team works well together?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 1], ["created_at", "2019-09-19 12:30:33.545715"], ["updated_at", "2019-09-19 12:30:33.545715"]]
+  [1m[35m (17.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How much do you trust your team members to do their part?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 2], ["created_at", "2019-09-19 12:30:33.573144"], ["updated_at", "2019-09-19 12:30:33.573144"]]
+  [1m[35m (18.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Resources"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team leader has good values?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 5], ["created_at", "2019-09-19 12:30:33.603631"], ["updated_at", "2019-09-19 12:30:33.603631"]]
+  [1m[35m (14.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel appreciated for your work?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 6], ["created_at", "2019-09-19 12:30:33.628336"], ["updated_at", "2019-09-19 12:30:33.628336"]]
+  [1m[35m (19.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team members are properly recognized for their contributions?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.657532"], ["updated_at", "2019-09-19 12:30:33.657532"]]
+  [1m[35m (17.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Management"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you find hiiiipe helpful?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 7], ["created_at", "2019-09-19 12:30:33.685134"], ["updated_at", "2019-09-19 12:30:33.685134"]]
+  [1m[35m (18.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you can learn from your teammates?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 1], ["created_at", "2019-09-19 12:30:33.713848"], ["updated_at", "2019-09-19 12:30:33.713848"]]
+  [1m[35m (15.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel OKRs are reasonably set?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 2], ["created_at", "2019-09-19 12:30:33.740511"], ["updated_at", "2019-09-19 12:30:33.740511"]]
+  [1m[35m (18.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are able to complete your tasks within regular working hours?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 3], ["created_at", "2019-09-19 12:30:33.769058"], ["updated_at", "2019-09-19 12:30:33.769058"]]
+  [1m[35m (17.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel like you have the right skill set for this project?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 3], ["created_at", "2019-09-19 12:30:33.798536"], ["updated_at", "2019-09-19 12:30:33.798536"]]
+  [1m[35m (16.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team has the right skill set for this project?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.825805"], ["updated_at", "2019-09-19 12:30:33.825805"]]
+  [1m[35m (16.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (1.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.8ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.4ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Are you learning new skills with this project?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.856509"], ["updated_at", "2019-09-19 12:30:33.856509"]]
+  [1m[35m (13.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel this project will help your career?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 1], ["created_at", "2019-09-19 12:30:33.883426"], ["updated_at", "2019-09-19 12:30:33.883426"]]
+  [1m[35m (15.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Are you able to focus on your work?"], ["team_stage", "All"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 2], ["created_at", "2019-09-19 12:30:33.905890"], ["updated_at", "2019-09-19 12:30:33.905890"]]
+  [1m[35m (21.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Resources"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel there is an appropriate level of meetings?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 5], ["created_at", "2019-09-19 12:30:33.934813"], ["updated_at", "2019-09-19 12:30:33.934813"]]
+  [1m[35m (20.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you attend daily standups?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 6], ["created_at", "2019-09-19 12:30:33.961819"], ["updated_at", "2019-09-19 12:30:33.961819"]]
+  [1m[35m (10.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (0.9ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Both"], ["created_at", "2019-09-19 12:30:33.983728"], ["updated_at", "2019-09-19 12:30:33.983728"]]
+  [1m[36mQuestion Create (1.6ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are encouraged to innovate?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:33.988044"], ["updated_at", "2019-09-19 12:30:33.988044"]]
+  [1m[35m (20.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (1.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Management"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Are you passionate to make this project a success?"], ["team_stage", "All"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 7], ["created_at", "2019-09-19 12:30:34.023100"], ["updated_at", "2019-09-19 12:30:34.023100"]]
+  [1m[35m (14.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you have all the support your need to succeed at this project?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 6], ["created_at", "2019-09-19 12:30:34.049326"], ["updated_at", "2019-09-19 12:30:34.049326"]]
+  [1m[35m (15.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are given enough autonomy to do a great job?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 12:30:34.075537"], ["updated_at", "2019-09-19 12:30:34.075537"]]
+  [1m[35m (19.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (941.7ms)[0m  [1m[35mCREATE DATABASE "rails_test_app_development" ENCODING = 'unicode'[0m
+  ↳ bin/rails:9
+  [1m[35m (129.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  ↳ bin/rails:9
+  [1m[35m (107.9ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_try_advisory_lock(6097591470689672835)[0m
+  ↳ bin/rails:9
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Migrating to CreateMappings (20190919090853)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (67.2ms)[0m  [1m[35mCREATE TABLE "mappings" ("id" bigserial primary key, "mapping_name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190919090853_create_mappings.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190919090853"]]
+  ↳ bin/rails:9
+  [1m[35m (19.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateRoles (20190919091003)
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (74.9ms)[0m  [1m[35mCREATE TABLE "roles" ("id" bigserial primary key, "name" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  ↳ db/migrate/20190919091003_create_roles.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190919091003"]]
+  ↳ bin/rails:9
+  [1m[35m (12.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+Migrating to CreateQuestions (20190919091139)
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[35m (82.6ms)[0m  [1m[35mCREATE TABLE "questions" ("id" bigserial primary key, "question" text, "team_stage" character varying, "appear" integer, "frequency" integer, "question_type" character varying, "role_id" bigint, "is_required" boolean, "conditions" character varying, "mapping_id" bigint, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL, CONSTRAINT "fk_rails_9d4d6c6fc2"
+FOREIGN KEY ("role_id")
+  REFERENCES "roles" ("id")
+, CONSTRAINT "fk_rails_897334f7f0"
+FOREIGN KEY ("mapping_id")
+  REFERENCES "mappings" ("id")
+)[0m
+  ↳ db/migrate/20190919091139_create_questions.rb:3
+  [1m[35m (42.3ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_role_id" ON "questions"  ("role_id")[0m
+  ↳ db/migrate/20190919091139_create_questions.rb:3
+  [1m[35m (41.4ms)[0m  [1m[35mCREATE  INDEX  "index_questions_on_mapping_id" ON "questions"  ("mapping_id")[0m
+  ↳ db/migrate/20190919091139_create_questions.rb:3
+  [1m[36mActiveRecord::SchemaMigration Create (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20190919091139"]]
+  ↳ bin/rails:9
+  [1m[35m (13.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Load (0.9ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  ↳ bin/rails:9
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ bin/rails:9
+  [1m[36mActiveRecord::InternalMetadata Create (1.0ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-09-19 13:34:28.564074"], ["updated_at", "2019-09-19 13:34:28.564074"]]
+  ↳ bin/rails:9
+  [1m[35m (53.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ bin/rails:9
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT pg_advisory_unlock(6097591470689672835)[0m
+  ↳ bin/rails:9
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ bin/rails:9
+Started GET "/" for ::1 at 2019-09-19 19:05:37 +0530
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/tps/.rvm/gems/ruby-2.5.1/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/tps/.rvm/gems/ruby-2.5.1/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (3.1ms)
+Completed 200 OK in 30ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+
+
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (0.5ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Admin"], ["created_at", "2019-09-19 13:36:10.963323"], ["updated_at", "2019-09-19 13:36:10.963323"]]
+  [1m[36mMapping Create (0.4ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Collaboration"], ["created_at", "2019-09-19 13:36:10.965066"], ["updated_at", "2019-09-19 13:36:10.965066"]]
+  [1m[36mQuestion Create (1.3ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the team's collaboration?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 1], ["created_at", "2019-09-19 13:36:10.966316"], ["updated_at", "2019-09-19 13:36:10.966316"]]
+  [1m[35m (23.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.4ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Engagement"], ["created_at", "2019-09-19 13:36:10.998513"], ["updated_at", "2019-09-19 13:36:10.998513"]]
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the team's engagement?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 2], ["created_at", "2019-09-19 13:36:10.999720"], ["updated_at", "2019-09-19 13:36:10.999720"]]
+  [1m[35m (19.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.5ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Communication"], ["created_at", "2019-09-19 13:36:11.026127"], ["updated_at", "2019-09-19 13:36:11.026127"]]
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the team's communications?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 3], ["created_at", "2019-09-19 13:36:11.027747"], ["updated_at", "2019-09-19 13:36:11.027747"]]
+  [1m[35m (19.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your own communications?"], ["team_stage", "All"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 3], ["created_at", "2019-09-19 13:36:11.053528"], ["updated_at", "2019-09-19 13:36:11.053528"]]
+  [1m[35m (10.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.5ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Trust"], ["created_at", "2019-09-19 13:36:11.070983"], ["updated_at", "2019-09-19 13:36:11.070983"]]
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your relationships with other team members?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.072814"], ["updated_at", "2019-09-19 13:36:11.072814"]]
+  [1m[35m (18.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate the relationships between the team members?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.097918"], ["updated_at", "2019-09-19 13:36:11.097918"]]
+  [1m[35m (11.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your own level of collaboration with other team members?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 1], ["created_at", "2019-09-19 13:36:11.117504"], ["updated_at", "2019-09-19 13:36:11.117504"]]
+  [1m[35m (18.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.3ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How would you rate your own level of engagement?"], ["team_stage", "All"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 2], ["created_at", "2019-09-19 13:36:11.145480"], ["updated_at", "2019-09-19 13:36:11.145480"]]
+  [1m[35m (17.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Resources"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.8ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Resources"], ["created_at", "2019-09-19 13:36:11.174053"], ["updated_at", "2019-09-19 13:36:11.174053"]]
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team has sufficient resources?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 5], ["created_at", "2019-09-19 13:36:11.176736"], ["updated_at", "2019-09-19 13:36:11.176736"]]
+  [1m[35m (14.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Admin"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.7ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Clarity"], ["created_at", "2019-09-19 13:36:11.202784"], ["updated_at", "2019-09-19 13:36:11.202784"]]
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team's goals and roles are clear?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 1], ["is_required", true], ["conditions", "Always"], ["mapping_id", 6], ["created_at", "2019-09-19 13:36:11.205247"], ["updated_at", "2019-09-19 13:36:11.205247"]]
+  [1m[35m (14.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (1.1ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "User"], ["created_at", "2019-09-19 13:36:11.231222"], ["updated_at", "2019-09-19 13:36:11.231222"]]
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel there is a good trust environment for your team?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Always"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.234562"], ["updated_at", "2019-09-19 13:36:11.234562"]]
+  [1m[35m (11.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Management"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mMapping Create (0.7ms)[0m  [1m[32mINSERT INTO "mappings" ("mapping_name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["mapping_name", "Management"], ["created_at", "2019-09-19 13:36:11.257560"], ["updated_at", "2019-09-19 13:36:11.257560"]]
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel the team has good management?"], ["team_stage", "All"], ["appear", 0], ["frequency", 60], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Always"], ["mapping_id", 7], ["created_at", "2019-09-19 13:36:11.260179"], ["updated_at", "2019-09-19 13:36:11.260179"]]
+  [1m[35m (15.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel this is a good project for your organization?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 1], ["created_at", "2019-09-19 13:36:11.285474"], ["updated_at", "2019-09-19 13:36:11.285474"]]
+  [1m[35m (17.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team is currently productive?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 2], ["created_at", "2019-09-19 13:36:11.315290"], ["updated_at", "2019-09-19 13:36:11.315290"]]
+  [1m[35m (16.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are currently productive?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 3], ["created_at", "2019-09-19 13:36:11.343683"], ["updated_at", "2019-09-19 13:36:11.343683"]]
+  [1m[35m (14.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you think the project will get done on time and on budget?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 3], ["created_at", "2019-09-19 13:36:11.370362"], ["updated_at", "2019-09-19 13:36:11.370362"]]
+  [1m[35m (16.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.9ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you find your work interesting and rewarding?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.401804"], ["updated_at", "2019-09-19 13:36:11.401804"]]
+  [1m[35m (11.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team has good morale?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.427070"], ["updated_at", "2019-09-19 13:36:11.427070"]]
+  [1m[35m (15.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team works well together?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 1], ["created_at", "2019-09-19 13:36:11.454629"], ["updated_at", "2019-09-19 13:36:11.454629"]]
+  [1m[35m (15.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "How much do you trust your team members to do their part?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 2], ["created_at", "2019-09-19 13:36:11.483344"], ["updated_at", "2019-09-19 13:36:11.483344"]]
+  [1m[35m (14.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Resources"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team leader has good values?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 5], ["created_at", "2019-09-19 13:36:11.510426"], ["updated_at", "2019-09-19 13:36:11.510426"]]
+  [1m[35m (15.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel appreciated for your work?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 6], ["created_at", "2019-09-19 13:36:11.534945"], ["updated_at", "2019-09-19 13:36:11.534945"]]
+  [1m[35m (20.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team members are properly recognized for their contributions?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.563432"], ["updated_at", "2019-09-19 13:36:11.563432"]]
+  [1m[35m (19.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Management"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you find hiiiipe helpful?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 7], ["created_at", "2019-09-19 13:36:11.592512"], ["updated_at", "2019-09-19 13:36:11.592512"]]
+  [1m[35m (18.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you can learn from your teammates?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 1], ["created_at", "2019-09-19 13:36:11.618987"], ["updated_at", "2019-09-19 13:36:11.618987"]]
+  [1m[35m (20.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.7ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel OKRs are reasonably set?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Rare"], ["mapping_id", 2], ["created_at", "2019-09-19 13:36:11.646419"], ["updated_at", "2019-09-19 13:36:11.646419"]]
+  [1m[35m (20.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.9ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are able to complete your tasks within regular working hours?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 3], ["created_at", "2019-09-19 13:36:11.677661"], ["updated_at", "2019-09-19 13:36:11.677661"]]
+  [1m[35m (16.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Communication"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.0ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel like you have the right skill set for this project?"], ["team_stage", "All"], ["appear", 0], ["frequency", 20], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 3], ["created_at", "2019-09-19 13:36:11.704902"], ["updated_at", "2019-09-19 13:36:11.704902"]]
+  [1m[35m (17.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel your team has the right skill set for this project?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.733370"], ["updated_at", "2019-09-19 13:36:11.733370"]]
+  [1m[35m (16.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Are you learning new skills with this project?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.758826"], ["updated_at", "2019-09-19 13:36:11.758826"]]
+  [1m[35m (20.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Collaboration"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.6ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel this project will help your career?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 1], ["created_at", "2019-09-19 13:36:11.785684"], ["updated_at", "2019-09-19 13:36:11.785684"]]
+  [1m[35m (9.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.2ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.2ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Engagement"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.4ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Are you able to focus on your work?"], ["team_stage", "All"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 2], ["created_at", "2019-09-19 13:36:11.800800"], ["updated_at", "2019-09-19 13:36:11.800800"]]
+  [1m[35m (13.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Resources"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (0.8ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel there is an appropriate level of meetings?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 5], ["created_at", "2019-09-19 13:36:11.819942"], ["updated_at", "2019-09-19 13:36:11.819942"]]
+  [1m[35m (19.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.6ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "User"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you attend daily standups?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 2], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 6], ["created_at", "2019-09-19 13:36:11.849829"], ["updated_at", "2019-09-19 13:36:11.849829"]]
+  [1m[35m (17.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.5ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mRole Create (0.9ms)[0m  [1m[32mINSERT INTO "roles" ("name", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["name", "Both"], ["created_at", "2019-09-19 13:36:11.878816"], ["updated_at", "2019-09-19 13:36:11.878816"]]
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are encouraged to innovate?"], ["team_stage", "Performing"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.881792"], ["updated_at", "2019-09-19 13:36:11.881792"]]
+  [1m[35m (13.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.9ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.8ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Management"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.1ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Are you passionate to make this project a success?"], ["team_stage", "All"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 7], ["created_at", "2019-09-19 13:36:11.908225"], ["updated_at", "2019-09-19 13:36:11.908225"]]
+  [1m[35m (15.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.7ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.5ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Clarity"], ["LIMIT", 1]]
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.2ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you have all the support your need to succeed at this project?"], ["team_stage", "Norming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 6], ["created_at", "2019-09-19 13:36:11.935350"], ["updated_at", "2019-09-19 13:36:11.935350"]]
+  [1m[35m (14.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mRole Load (0.8ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."name" = $1 LIMIT $2[0m  [["name", "Both"], ["LIMIT", 1]]
+  [1m[36mMapping Load (0.7ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."mapping_name" = $1 LIMIT $2[0m  [["mapping_name", "Trust"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mQuestion Create (1.4ms)[0m  [1m[32mINSERT INTO "questions" ("question", "team_stage", "appear", "frequency", "question_type", "role_id", "is_required", "conditions", "mapping_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING "id"[0m  [["question", "Do you feel you are given enough autonomy to do a great job?"], ["team_stage", "Forming"], ["appear", 0], ["frequency", 31], ["question_type", "Rating scale"], ["role_id", 3], ["is_required", true], ["conditions", "Medium"], ["mapping_id", 4], ["created_at", "2019-09-19 13:36:11.965147"], ["updated_at", "2019-09-19 13:36:11.965147"]]
+  [1m[35m (12.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2019-09-19 19:06:40 +0530
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /home/tps/.rvm/gems/ruby-2.5.1/gems/activerecord-5.2.3/lib/active_record/log_subscriber.rb:98
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /home/tps/.rvm/gems/ruby-2.5.1/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/tps/.rvm/gems/ruby-2.5.1/gems/railties-5.2.3/lib/rails/templates/rails/welcome/index.html.erb (2.8ms)
+Completed 200 OK in 8ms (Views: 6.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/favicon.ico" for ::1 at 2019-09-19 19:06:40 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/questions" for ::1 at 2019-09-19 19:06:48 +0530
+Processing by QuestionsController#index as HTML
+  [1m[36mQuestion Load (1.1ms)[0m  [1m[34mSELECT "questions".* FROM "questions"[0m
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mMapping Load (0.4ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mRole Load (0.4ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mMapping Load (0.3ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mRole Load (0.3ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 7], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 6], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Mapping Load (0.0ms)[0m  [1m[34mSELECT  "mappings".* FROM "mappings" WHERE "mappings"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+  [1m[36mCACHE Role Load (0.0ms)[0m  [1m[34mSELECT  "roles".* FROM "roles" WHERE "roles"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/questions_controller.rb:8
+Completed 200 OK in 234ms (Views: 0.2ms | ActiveRecord: 17.0ms)
+
+
+Started GET "/mapping_list" for ::1 at 2019-09-19 19:32:13 +0530
+  
+SyntaxError (/home/tps/sites/react_demos/kinjal/rails_test_app/config/routes.rb:9: syntax error, unexpected end-of-input, expecting keyword_end):
+  
+config/routes.rb:9: syntax error, unexpected end-of-input, expecting keyword_end
+Started GET "/mapping_list" for ::1 at 2019-09-19 19:32:37 +0530
+  
+ActionController::RoutingError (No route matches [GET] "/mapping_list"):
+  
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:65:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/questions/mapping_list" for ::1 at 2019-09-19 19:33:09 +0530
+Processing by QuestionsController#mapping_list as HTML
+  [1m[36mMapping Load (0.6ms)[0m  [1m[34mSELECT "mappings".* FROM "mappings"[0m
+  ↳ app/controllers/questions_controller.rb:12
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 5.1ms)
+
+
+Started GET "/questions/role_list" for ::1 at 2019-09-19 19:33:22 +0530
+Processing by QuestionsController#role_list as HTML
+  [1m[36mRole Load (1.6ms)[0m  [1m[34mSELECT "roles".* FROM "roles"[0m
+  ↳ app/controllers/questions_controller.rb:17
+Completed 200 OK in 17ms (Views: 0.1ms | ActiveRecord: 6.6ms)
+
+
+Started GET "/questions/1" for ::1 at 2019-09-19 19:35:35 +0530
+  
+AbstractController::ActionNotFound (The action 'show' could not be found for QuestionsController):
+  
+actionpack (5.2.3) lib/abstract_controller/base.rb:129:in `process'
+actionpack (5.2.3) lib/action_controller/metal.rb:191:in `dispatch'
+actionpack (5.2.3) lib/action_controller/metal.rb:252:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:52:in `dispatch'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:34:in `serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:52:in `block in serve'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `each'
+actionpack (5.2.3) lib/action_dispatch/journey/router.rb:35:in `serve'
+actionpack (5.2.3) lib/action_dispatch/routing/route_set.rb:840:in `call'
+rack (2.0.7) lib/rack/etag.rb:25:in `call'
+rack (2.0.7) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.7) lib/rack/head.rb:12:in `call'
+activerecord (5.2.3) lib/active_record/migration.rb:559:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:28:in `block in call'
+activesupport (5.2.3) lib/active_support/callbacks.rb:98:in `run_callbacks'
+actionpack (5.2.3) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/debug_exceptions.rb:61:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (5.2.3) lib/rails/rack/logger.rb:38:in `call_app'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `block in tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (5.2.3) lib/active_support/tagged_logging.rb:71:in `tagged'
+railties (5.2.3) lib/rails/rack/logger.rb:26:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.2.3) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (5.2.3) lib/action_dispatch/middleware/static.rb:127:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+rack-cors (1.0.3) lib/rack/cors.rb:95:in `call'
+railties (5.2.3) lib/rails/engine.rb:524:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
