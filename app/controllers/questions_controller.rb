@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
 
   def create
     question = Question.create(question_params)
-    render json: question.to_json, status: 200
+    render json: question.to_json.merge( {role_name: question.role.name,mapping_name: question.mapping.mapping_name} ), status: 200
   end
 
   def update
